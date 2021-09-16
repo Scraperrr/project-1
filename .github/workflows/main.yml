@@ -24,9 +24,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          token: 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
+        uses: actions/checkout@v1
+        
     
       # Install NPM dependencies, cache them correctly
       # and run all Cypress tests
