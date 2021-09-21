@@ -9,7 +9,7 @@ function getCollectionNameFromGameName(gameName) {
 async function saveGameIfNeeded(processedGame, gameName, date, platform) {
     let collectionName = getCollectionNameFromGameName(gameName)
     const Game = mongoose.model(collectionName, GameSchema);
-    
+
     const game = new Game({
         adName: processedGame['adName'],
         soldPrice: processedGame['price'],
@@ -34,21 +34,18 @@ async function saveGameIfNeeded(processedGame, gameName, date, platform) {
 async function updateLastDate(processedGame, gameName, date, platform) {
     let collectionName = getCollectionNameFromGameName(gameName)
     const Game = mongoose.model(collectionName, GameSchema);
-    
-    const storedGame = await Game.findOne({
-        adName: adName
-    })
 
-    storedGame.lastUpdate = date
-
-    storedGame.save()
-        .then(() => {
-            console.log(`${processedGame['adName']} price info updated`);
-        })
-        .catch((error) => {
-            console.log(error)
-        });
-
+    const update = {
+        lastUpdate: date
+    }
+    const filter = {
+        adName: processedGame.adName
+    }
+    try {
+        await Game.findOneAndUpdate(filter, update)
+        console.log(`${processedGame['adName']} price info updated`);
+    } catch (error) {
+    }
 
 }
 

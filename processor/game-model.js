@@ -8,7 +8,8 @@ const GameSchema = new mongoose.Schema({
     name: String,
     addedDate: String,
     itemType: String,
-    platform: String
+    platform: String,
+    lastUpdate: { type: String, default: '21-09-2021'}
 })
 
 // const Game = mongoose.model('Game', gameSchema);
