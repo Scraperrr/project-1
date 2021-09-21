@@ -32,9 +32,9 @@ try {
             while ((games = platformFiles.readSync()) !== null) {
                 const files = fs.readdirSync(`./output-files/${platforms.name}/${games.name}`);
                 files.forEach(async file => {
-                    if (file.includes('20-09-2021')) {
+                    // if (file.includes('20-09-2021')) {
                         preProcessCsv(`./output-files/${platforms.name}/${games.name}/${file}`, games.name, platforms.name, file.replace('.csv', ''))
-                    }
+                    // }
                 });
             }
             platformFiles.closeSync()
