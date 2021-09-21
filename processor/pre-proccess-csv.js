@@ -5,7 +5,8 @@ const {
 } = require('./item-type');
 const {
     saveGameIfNeeded,
-    isGameAlreadyStored
+    isGameAlreadyStored,
+    updateLastDate
 } = require('./game-saver');
 const {
     prefilterData
