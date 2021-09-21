@@ -4,7 +4,8 @@ const {
     guessItemType
 } = require('./item-type');
 const {
-    saveGameIfNeeded, isGameAlreadyStored
+    saveGameIfNeeded,
+    isGameAlreadyStored
 } = require('./game-saver');
 const {
     prefilterData
@@ -29,12 +30,16 @@ function preProcessCsv(path, gameName, platform, date) {
                 prefilteredData['itemType'] = guessItemType(prefilteredData['adName']) //Clasificar item 
                 // TODO: CALCULAR EL PRECIO MEDIO, MEDIANO, ETC DE CADA JUEGO Y GUARDARLO EN BBDD, EN LUGAR DE GUARDAR LA INFO DE CADA CSV.
                 const isStored = await isGameAlreadyStored(prefilteredData['adName'], gameName)
-                if(!isStored) await saveGameIfNeeded(prefilteredData, gameName, date, platform)
+                if (!isStored) {
+                    await saveGameIfNeeded(prefilteredData, gameName, date, platform)
+                } else {
+                    await updateLastDate(prefilteredData, gameName, date, platform)
+                }
             }
         })
-        // .on('end', async () => {
-        //     console.log('terminado!')
-        // });
+    // .on('end', async () => {
+    //     console.log('terminado!')
+    // });
 }
 
 module.exports = {

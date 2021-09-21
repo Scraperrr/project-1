@@ -31,6 +31,27 @@ async function saveGameIfNeeded(processedGame, gameName, date, platform) {
 
 }
 
+async function updateLastDate(processedGame, gameName, date, platform) {
+    let collectionName = getCollectionNameFromGameName(gameName)
+    const Game = mongoose.model(collectionName, GameSchema);
+    
+    const storedGame = await Game.findOne({
+        adName: adName
+    })
+
+    storedGame.lastUpdate = date
+
+    storedGame.save()
+        .then(() => {
+            console.log(`${processedGame['adName']} price info updated`);
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+
+
+}
+
 async function isGameAlreadyStored(adName, gameName) {
     let collectionName = getCollectionNameFromGameName(gameName)
     const Game = mongoose.model(collectionName, GameSchema);
@@ -42,5 +63,6 @@ async function isGameAlreadyStored(adName, gameName) {
 
 module.exports = {
     saveGameIfNeeded,
-    isGameAlreadyStored
+    isGameAlreadyStored,
+    updateLastDate
 }
