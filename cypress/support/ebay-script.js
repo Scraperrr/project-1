@@ -1,13 +1,12 @@
 const dateFormat = require('dateformat');
 
-const search = (platformName, fileUrl, startIndex, endIndex) => {
+const search = (platformName, fileUrl) => {
     const timestamp = Date.now();
     const date = dateFormat(timestamp, 'dd-mm-yyyy');
 
     cy.visit('https://www.ebay.es/');
 
     cy.readFile(fileUrl).then((games) => {
-        for(let i = startIndex; i <= endIndex; i++) {
             let game = games.games[i]
             const filePath = `./output-files/${platformName}/${game}/${date}.csv`;
             cy.task('fileExists', filePath).then((exists) => {
@@ -97,8 +96,6 @@ const search = (platformName, fileUrl, startIndex, endIndex) => {
                     });
                 }
             });
-
-        }
     });
 };
 

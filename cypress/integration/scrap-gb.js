@@ -5,8 +5,8 @@ describe('ebay', () => {
         return false;
     });
 
-    it('Searches for Game Boy Color', () => {
-        Search('Game Boy Color', './input-files/game-boy-color.json');
+    it('Searches for Game Boy', () => {
+        Search('Game Boy', './input-files/game-boy.json');
     });
 
     // it('Searches for Playstation 1', () => {
